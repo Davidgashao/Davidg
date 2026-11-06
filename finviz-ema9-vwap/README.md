@@ -75,6 +75,20 @@ https://finviz.com/screener.ashx?v=111&f=sh_avgvol_o500,sh_curvol_o1000,sh_price
 | 50-Day SMA | Price above SMA50 |
 | מיון | Relative Volume (יורד) |
 
+## ⭐ סקינר לונג לחשבון קטן (מניות $2–$10)
+```
+https://finviz.com/screener.ashx?v=111&f=sh_avgvol_o500,sh_curvol_o500,sh_float_u100,sh_price_2to10,sh_relvol_o2,ta_change_u3,ta_changeopen_u&o=-relativevolume
+```
+| פילטר | ערך | למה |
+|---|---|---|
+| Price | $2–$10 | מתאים לחשבון קטן |
+| Change | Up 3% | המניה עולה היום |
+| Change from Open | Up | המחיר מעל הפתיחה – הקונים שולטים (מתאים ללונג מעל VWAP) |
+| Relative Volume | Over 2 | ווליום חריג |
+| Current Volume | Over 500K | נזילות היום |
+| Average Volume | Over 500K | נזילות בסיסית |
+| Float | Under 100M | פלוט קטן-בינוני = תנועות חדות |
+
 ## ⭐ סקינר לשורט (EMA 9 חוצה **מתחת** ל-VWAP)
 ```
 https://finviz.com/screener.ashx?v=111&f=sh_avgvol_o1000,sh_curvol_o1000,sh_opt_short,sh_price_o5,sh_relvol_o2,ta_change_d3,ta_sma20_pb,ta_sma50_pb&o=-relativevolume
