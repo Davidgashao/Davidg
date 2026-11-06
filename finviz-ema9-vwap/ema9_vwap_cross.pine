@@ -1,37 +1,22 @@
 //@version=5
 indicator("EMA 9 + VWAP Cross (3m)", overlay = true)
-
-emaLen   = input.int(9, "EMA Length")
-allowShort = input.bool(true, "Show short / put signals")
-
-ema9  = ta.ema(close, emaLen)
+emaLen = input.int(9, "EMA Length")
+allowShort = input.bool(true, "Show short signals")
+ema9 = ta.ema(close, emaLen)
 vwapV = ta.vwap(hlc3)
-
-plot(ema9,  "EMA 9", color = color.new(color.purple, 0), linewidth = 2)
-plot(vwapV, "VWAP",  color = color.new(color.orange, 0), linewidth = 2)
-
-// Entry: EMA9 crosses VWAP
-longEntry  = ta.crossover(ema9, vwapV)
+plot(ema9, "EMA 9", color = color.purple, linewidth = 2)
+plot(vwapV, "VWAP", color = color.orange, linewidth = 2)
+longEntry = ta.crossover(ema9, vwapV)
 shortEntry = allowShort and ta.crossunder(ema9, vwapV)
-
-// Track the side of the last cross for the stop rule
 var int side = 0
-if longEntry
-    side := 1
-if shortEntry
-    side := -1
-
-// Stop: a candle CLOSES through EMA9 after the cross
-longExit  = side == 1  and not longEntry  and close < ema9
+side := longEntry ? 1 : shortEntry ? -1 : side
+longExit = side == 1 and not longEntry and close < ema9
 shortExit = side == -1 and not shortEntry and close > ema9
-if longExit or shortExit
-    side := 0
-
-plotshape(longEntry,  "Long entry",  shape.triangleup,   location.belowbar, color.green, text = "BUY")
-plotshape(shortEntry, "Short entry", shape.triangledown, location.abovebar, color.red,   text = "SELL")
-plotshape(longExit,   "Long exit",   shape.xcross,       location.abovebar, color.gray,  text = "EXIT")
-plotshape(shortExit,  "Short exit",  shape.xcross,       location.belowbar, color.gray,  text = "EXIT")
-
-alertcondition(longEntry,  "EMA9 crossed above VWAP", "{{ticker}}: EMA9 crossed ABOVE VWAP - long/call entry")
-alertcondition(shortEntry, "EMA9 crossed below VWAP", "{{ticker}}: EMA9 crossed BELOW VWAP - short/put entry")
-alertcondition(longExit or shortExit, "Close through EMA9 (stop)", "{{ticker}}: candle closed through EMA9 - exit")
+side := (longExit or shortExit) ? 0 : side
+plotshape(longEntry, "Long entry", shape.triangleup, location.belowbar, color.green, text = "BUY")
+plotshape(shortEntry, "Short entry", shape.triangledown, location.abovebar, color.red, text = "SELL")
+plotshape(longExit, "Long exit", shape.xcross, location.abovebar, color.gray, text = "EXIT")
+plotshape(shortExit, "Short exit", shape.xcross, location.belowbar, color.gray, text = "EXIT")
+alertcondition(longEntry, "EMA9 crossed above VWAP", "EMA9 crossed ABOVE VWAP - long entry")
+alertcondition(shortEntry, "EMA9 crossed below VWAP", "EMA9 crossed BELOW VWAP - short entry")
+alertcondition(longExit or shortExit, "Close through EMA9 (stop)", "Candle closed through EMA9 - exit")
