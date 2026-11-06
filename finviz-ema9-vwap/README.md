@@ -60,8 +60,6 @@ https://finviz.com/screener.ashx?v=111&f=cap_midover,sh_avgvol_o2000,sh_opt_opti
 
 ---
 
----
-
 ## ⭐ סקינר ללונג (EMA 9 חוצה **מעל** VWAP)
 ```
 https://finviz.com/screener.ashx?v=111&f=sh_avgvol_o500,sh_curvol_o1000,sh_price_o2,sh_relvol_o2,ta_change_u3,ta_sma20_pa,ta_sma50_pa&o=-relativevolume
