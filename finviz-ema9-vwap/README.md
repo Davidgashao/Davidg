@@ -60,6 +60,41 @@ https://finviz.com/screener.ashx?v=111&f=cap_midover,sh_avgvol_o2000,sh_opt_opti
 
 ---
 
+---
+
+## ⭐ סקינר ללונג (EMA 9 חוצה **מעל** VWAP)
+```
+https://finviz.com/screener.ashx?v=111&f=sh_avgvol_o500,sh_curvol_o1000,sh_price_o2,sh_relvol_o2,ta_change_u3,ta_sma20_pa,ta_sma50_pa&o=-relativevolume
+```
+| פילטר | ערך |
+|---|---|
+| Price | Over $2 |
+| Change | Up 3% |
+| Relative Volume | Over 2 |
+| Current Volume | Over 1M |
+| Average Volume | Over 500K |
+| 20-Day SMA | Price above SMA20 |
+| 50-Day SMA | Price above SMA50 |
+| מיון | Relative Volume (יורד) |
+
+## ⭐ סקינר לשורט (EMA 9 חוצה **מתחת** ל-VWAP)
+```
+https://finviz.com/screener.ashx?v=111&f=sh_avgvol_o1000,sh_curvol_o1000,sh_opt_short,sh_price_o5,sh_relvol_o2,ta_change_d3,ta_sma20_pb,ta_sma50_pb&o=-relativevolume
+```
+| פילטר | ערך |
+|---|---|
+| Price | Over $5 (מתחת לזה קשה לשאול מניות לשורט) |
+| Option/Short | Shortable |
+| Change | Down 3% |
+| Relative Volume | Over 2 |
+| Current Volume | Over 1M |
+| Average Volume | Over 1M |
+| 20-Day SMA | Price below SMA20 |
+| 50-Day SMA | Price below SMA50 |
+| מיון | Relative Volume (יורד) |
+
+סטופ בשורט: נר 3 דק' שנסגר **מעל** ה-EMA 9 אחרי החצייה, או ‎-25%‎ עד ‎-30%‎.
+
 ## סדר עבודה יומי
 1. **9:30–9:45 (שעון ניו יורק)** – פותחים את הסקינר, בוחרים 3–5 מניות עם הכי הרבה Rel Volume.
    (מתוך ישראל: 16:30–16:45 ברוב השנה.)
