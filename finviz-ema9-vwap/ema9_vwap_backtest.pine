@@ -1,0 +1,15 @@
+//@version=5
+strategy("EMA9 VWAP Backtest", overlay = true, initial_capital = 60, default_qty_type = strategy.percent_of_equity, default_qty_value = 100, commission_type = strategy.commission.cash_per_order, commission_value = 0, slippage = 1)
+slPct = input.float(3.0, "Stop loss %", step = 0.5)
+ema9 = ta.ema(close, 9)
+vwapV = ta.vwap(hlc3)
+plot(ema9, "EMA 9", color = color.purple, linewidth = 2)
+plot(vwapV, "VWAP", color = color.orange, linewidth = 2)
+inSess = not na(time(timeframe.period, "0935-1545", "America/New_York"))
+eod = not na(time(timeframe.period, "1550-1600", "America/New_York"))
+longEntry = ta.crossover(ema9, vwapV) and inSess
+inLong = strategy.position_size > 0
+strategy.entry("Long", strategy.long, when = longEntry and not inLong)
+strategy.exit("SL", "Long", stop = strategy.position_avg_price * (1 - slPct / 100))
+strategy.close("Long", when = inLong and close < ema9, comment = "EMA9")
+strategy.close_all(when = eod, comment = "EOD")
